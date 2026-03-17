@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOS: Symptoms or Stress</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f7f5;
+      --panel: rgba(255,255,255,0.86);
+      --panel-strong: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --soft: #f3f4f6;
+      --accent: #111827;
+      --sky: #eff6ff;
+      --sky-line: #bfdbfe;
+      --amber: #fffbeb;
+      --amber-line: #fcd34d;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 999px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #f5f5f4 0%, #ffffff 42%, #f1f5f9 100%);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .shell {
+      width: min(1200px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .hero,
+    .card {
+      background: var(--panel);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .tagline {
+      margin: 16px 0 0;
+      font-size: 1.1rem;
+      color: #4b5563;
+    }
+
+    .intro {
+      margin-top: 18px;
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-self: end;
+    }
+
+    .stat {
+      background: var(--soft);
+      border-radius: var(--radius-lg);
+      padding: 18px 14px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      margin-top: 10px;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+    }
+
+    .stack { display: grid; gap: 24px; }
+
+    .card { padding: 26px; }
+
+    .card-header {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      border-radius: 18px;
+      font-size: 22px;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .desc {
+      margin-top: 5px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .search {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: white;
+      font: inherit;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: white;
+      color: #374151;
+      padding: 10px 15px;
+      border-radius: var(--radius-sm);
+      font: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .chip:hover { border-color: #cbd5e1; transform: translateY(-1px); }
+    .chip.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .soft-box {
+      background: var(--soft);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .muted { color: var(--muted); }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #111827;
+    }
+
+    .duration {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .duration button,
+    .primary,
+    .case-button {
+      font: inherit;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .duration button {
+      border: 1px solid var(--line);
+      background: white;
+      color: #374151;
+      border-radius: 16px;
+      padding: 11px 12px;
+    }
+
+    .duration button.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .primary {
+      width: 100%;
+      border: none;
+      background: var(--accent);
+      color: white;
+      border-radius: 18px;
+      padding: 15px 18px;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .primary:hover,
+    .case-button:hover,
+    .duration button:hover { transform: translateY(-1px); }
+
+    .assessment {
+      margin-top: 18px;
+      border-radius: 28px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      display: none;
+    }
+
+    .assessment.show { display: block; }
+    .assessment.sky { background: var(--sky); border-color: var(--sky-line); }
+    .assessment.amber { background: var(--amber); border-color: var(--amber-line); }
+    .assessment.slate { background: var(--soft); }
+
+    .badge {
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.7);
+      padding: 7px 12px;
+      font-size: 12px;
+      color: #4b5563;
+      white-space: nowrap;
+    }
+
+    .assessment-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .assessment h3 {
+      margin: 4px 0 0;
+      font-size: 1.35rem;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .bar {
+      height: 10px;
+      width: 100%;
+      margin-top: 9px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: rgba(255,255,255,0.7);
+    }
+
+    .fill {
+      height: 100%;
+      width: 0;
+      border-radius: var(--radius-sm);
+      background: #111827;
+      transition: width 0.35s ease;
+    }
+
+    .summary {
+      margin-top: 16px;
+      color: #374151;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .next-step {
+      margin-top: 14px;
+      background: rgba(255,255,255,0.75);
+      border-radius: 18px;
+      padding: 14px;
+      color: #374151;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .info-box,
+    .reasoning,
+    .standout {
+      background: var(--soft);
+      border-radius: 24px;
+      padding: 16px;
+    }
+
+    .info-box + .info-box,
+    .standout + .standout,
+    .case-button + .case-button {
+      margin-top: 12px;
+    }
+
+    .info-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .info-text,
+    .standout {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    ul {
+      margin: 10px 0 0 18px;
+      padding: 0;
+    }
+
+    li + li { margin-top: 8px; }
+
+    .warning {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+      background: white;
+    }
+
+    .case-button {
+      width: 100%;
+      text-align: left;
+      padding: 16px;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--text);
+    }
+
+    .case-button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .case-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .case-summary {
+      margin-top: 8px;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .reasoning-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .grid,
+      .mini-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .stats { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 18px, 1200px); }
+      .hero, .card { border-radius: 26px; }
+      .hero, .card { padding: 20px; }
+      .stats { grid-template-columns: 1fr; }
+      .duration { grid-template-columns: 1fr; }
+      .mini-grid { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div>
+        <div class="pill">✦ Teen-friendly health learning</div>
+        <h1>SOS: Symptoms or Stress</h1>
+        <p class="tagline">Because Googling symptoms shouldn’t feel terrifying.</p>
+        <p class="intro">
+          A calm, educational app that helps teens think through symptoms, learn basic clinical reasoning,
+          and understand when stress may be part of the picture.
+        </p>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">Symptoms</div>
+          <div class="stat-value" id="symptomCount">2</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Stress</div>
+          <div class="stat-value" id="stressDisplay">8/10</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Cases</div>
+          <div class="stat-value">3</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="stack">
+        <div class="card">
+          <div class="card-header">
+            <div class="icon">🫀</div>
+            <div>
+              <h2>Symptom Checker</h2>
+              <div class="desc">Select symptoms and answer a few calm check-in questions.</div>
+            </div>
+          </div>
+
+          <input class="search" id="searchInput" placeholder="Search symptoms" />
+          <div class="chips" id="chips"></div>
+
+          <div class="two-col">
+            <div class="soft-box">
+              <div class="row">
+                <span>Stress level</span>
+                <span class="muted" id="sliderValue">8/10</span>
+              </div>
+              <input type="range" min="1" max="10" value="8" id="stressSlider" />
+            </div>
+
+            <div class="soft-box">
+              <div class="row">
+                <span>How long has this been going on?</span>
+              </div>
+              <div class="duration" id="durationButtons">
+                <button class="active" data-value="Today">Today</button>
+                <button data-value="A few days">A few days</button>
+                <button data-value="More than a week">More than a week</button>
+              </div>
+            </div>
+          </div>
+
+          <button class="primary" id="checkButton">Check in with my symptoms</button>
+
+          <div class="assessment" id="assessmentBox">
+            <div class="assessment-top">
+              <div>
+                <div class="muted" style="font-size:14px;">Assessment</div>
+                <h3 id="assessmentLabel">Likely stress-influenced</h3>
+              </div>
+              <div class="badge">Educational, not diagnostic</div>
+            </div>
+
+            <div class="progress-top">
+              <span>Stress influence estimate</span>
+              <span id="assessmentPercent">63%</span>
+            </div>
+            <div class="bar"><div class="fill" id="fillBar"></div></div>
+
+            <div class="summary" id="assessmentSummary"></div>
+            <div class="next-step"><strong>Next step:</strong> <span id="assessmentNext"></span></div>
+          </div>
+        </div>
+
+        <div class="mini-grid">
+          <div class="card">
+            <div class="card-header">
+              <div class="icon">🧠</div>
+              <div>
+                <h2>Learn Mode</h2>
+                <div class="desc">Understand the why behind symptoms.</div>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <div class="info-title">Stress can feel physical</div>
+              <div class="info-text">Stress does not just stay in your mind. It can show up as headaches, nausea, fatigue, chest tightness, or trouble sleeping.</div>
+            </div>
+            <div class="info-box">
+              <div class="info-title">Patterns matter</div>
+              <div class="info-text">Doctors look for timing, severity, triggers, and what other symptoms happen together. Your app can teach that kind of thinking.</div>
+            </div>
+            <div class="info-box">
+              <div class="info-title">Red flags matter too</div>
+              <div class="info-text">Some symptoms need quicker attention, especially if they are severe, sudden, or keep getting worse.</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="icon">🌬️</div>
+              <div>
+                <h2>Calm Check</h2>
+                <div class="desc">Support the nervous system too.</div>
+              </div>
+            </div>
+
+            <div class="info-box">
+              <div class="info-title">Quick reset</div>
+              <div class="info-text">Inhale for 4, hold for 4, exhale for 6. Repeat three times and check whether your symptoms shift at all.</div>
+            </div>
+            <div class="info-box">
+              <div class="info-title">Gentle reminders</div>
+              <div class="info-text">
+                <ul>
+                  <li>Hydrate and eat something nourishing.</li>
+                  <li>Notice whether stress seems to trigger symptoms.</li>
+                  <li>Ask for help if anything feels intense or unusual.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="warning">This app is for learning and reflection. It does not replace a doctor, urgent care, or emergency support.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Case Challenges</h2>
+              <div class="desc">Practice clinical reasoning in a way that still feels approachable.</div>
+            </div>
+          </div>
+
+          <div id="caseButtons"></div>
+          <div class="reasoning">
+            <div class="reasoning-title">Reasoning</div>
+            <div class="info-text" id="caseAnswer"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Why this project stands out</h2>
+              <div class="desc">Built for teens, grounded in health education, and designed with empathy.</div>
+            </div>
+          </div>
+
+          <div class="standout">Combines symptom awareness, stress education, and calm design instead of creating more anxiety.</div>
+          <div class="standout">Shows your interest in clinical reasoning, pathology, teen health access, and thoughtful product design.</div>
+          <div class="standout">Easy to expand later with HOSA practice, real educational modules, or physician-reviewed content.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-note">Built as a student project concept for health education and clinical reasoning practice.</div>
+  </div>
+
+  <script>
+    const symptomOptions = [
+      'Headache',
+      'Fatigue',
+      'Nausea',
+      'Chest tightness',
+      'Dizziness',
+      'Stomach pain',
+      'Trouble sleeping',
+      'Fast heartbeat'
+    ];
+
+    const caseChallenges = [
+      {
+        title: 'Case 01',
+        summary: 'A student has headaches, poor sleep, and high stress before exams.',
+        answer: 'This pattern may point toward stress-related symptoms, but persistent or worsening symptoms should still be checked by a medical professional.'
+      },
+      {
+        title: 'Case 02',
+        summary: 'A teen reports fatigue, dizziness, and shortness of breath during normal activity.',
+        answer: 'This could be more than stress and may need medical evaluation, especially if symptoms are new or interfering with daily life.'
+      },
+      {
+        title: 'Case 03',
+        summary: 'Someone has nausea and stomach pain after a very anxious week and not eating regularly.',
+        answer: 'Stress can affect digestion, but ongoing pain, vomiting, fever, or severe symptoms should be medically assessed.'
+      }
+    ];
+
+    let selectedSymptoms = ['Headache', 'Fatigue'];
+    let stressLevel = 8;
+    let duration = 'Today';
+    let activeCase = 0;
+    let query = '';
+
+    const chipsEl = document.getElementById('chips');
+    const searchInput = document.getElementById('searchInput');
+    const stressSlider = document.getElementById('stressSlider');
+    const sliderValue = document.getElementById('sliderValue');
+    const stressDisplay = document.getElementById('stressDisplay');
+    const symptomCount = document.getElementById('symptomCount');
+    const durationButtons = document.getElementById('durationButtons');
+    const checkButton = document.getElementById('checkButton');
+    const assessmentBox = document.getElementById('assessmentBox');
+    const assessmentLabel = document.getElementById('assessmentLabel');
+    const assessmentPercent = document.getElementById('assessmentPercent');
+    const assessmentSummary = document.getElementById('assessmentSummary');
+    const assessmentNext = document.getElementById('assessmentNext');
+    const fillBar = document.getElementById('fillBar');
+    const caseButtons = document.getElementById('caseButtons');
+    const caseAnswer = document.getElementById('caseAnswer');
+
+    function getAssessment(selected, stress, currentDuration) {
+      const stressLinked = ['Headache', 'Fatigue', 'Trouble sleeping', 'Fast heartbeat', 'Nausea'];
+      const potentialRedFlags = ['Chest tightness', 'Dizziness'];
+
+      const hasStressLinked = selected.some(s => stressLinked.includes(s));
+      const hasPotentialRedFlag = selected.some(s => potentialRedFlags.includes(s));
+
+      if (hasPotentialRedFlag && (currentDuration === 'More than a week' || stress <= 4)) {
+        return {
+          label: 'Possibly medical',
+          percent: 72,
+          style: 'amber',
+          summary: 'Some of your answers suggest this may be worth checking with a medical professional instead of assuming it is only stress.',
+          next: 'Monitor closely and seek medical advice, especially if symptoms are intense, new, or getting worse.'
+        };
+      }
+
+      if (hasStressLinked && stress >= 7) {
+        return {
+          label: 'Likely stress-influenced',
+          percent: 63,
+          style: 'sky',
+          summary: 'Your answers match a pattern that can happen when stress affects the body. That does not make the symptoms fake. It means stress may be part of the picture.',
+          next: 'Try rest, hydration, food, and stress support. If symptoms continue, worsen, or feel unusual, talk to a medical professional.'
+        };
+      }
+
+      return {
+        label: 'Mixed signals',
+        percent: 48,
+        style: 'slate',
+        summary: 'Your symptoms could have different causes. Stress might play a role, but there is not enough here to assume one clear explanation.',
+        next: 'Track what changes the symptoms, how long they last, and whether any red flags show up.'
+      };
+    }
+
+    function renderSymptoms() {
+      const filtered = symptomOptions.filter(item => item.toLowerCase().includes(query.toLowerCase()));
+      chipsEl.innerHTML = '';
+
+      filtered.forEach(symptom => {
+        const button = document.createElement('button');
+        button.className = 'chip' + (selectedSymptoms.includes(symptom) ? ' active' : '');
+        button.textContent = symptom;
+        button.addEventListener('click', () => {
+          if (selectedSymptoms.includes(symptom)) {
+            selectedSymptoms = selectedSymptoms.filter(item => item !== symptom);
+          } else {
+            selectedSymptoms.push(symptom);
+          }
+          updateStats();
+          renderSymptoms();
+        });
+        chipsEl.appendChild(button);
+      });
+    }
+
+    function renderCases() {
+      caseButtons.innerHTML = '';
+      caseChallenges.forEach((item, index) => {
+        const button = document.createElement('button');
+        button.className = 'case-button' + (activeCase === index ? ' active' : '');
+        button.innerHTML = `
+          <div class="case-label">${item.title}</div>
+          <div class="case-summary">${item.summary}</div>
+        `;
+        button.addEventListener('click', () => {
+          activeCase = index;
+          renderCases();
+        });
+        caseButtons.appendChild(button);
+      });
+      caseAnswer.textContent = caseChallenges[activeCase].answer;
+    }
+
+    function updateStats() {
+      symptomCount.textContent = selectedSymptoms.length;
+      sliderValue.textContent = `${stressLevel}/10`;
+      stressDisplay.textContent = `${stressLevel}/10`;
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      query = e.target.value;
+      renderSymptoms();
+    });
+
+    stressSlider.addEventListener('input', (e) => {
+      stressLevel = Number(e.target.value);
+      updateStats();
+    });
+
+    durationButtons.querySelectorAll('button').forEach(button => {
+      button.addEventListener('click', () => {
+        duration = button.dataset.value;
+        durationButtons.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+      });
+    });
+
+    checkButton.addEventListener('click', () => {
+      const result = getAssessment(selectedSymptoms, stressLevel, duration);
+      assessmentBox.className = `assessment show ${result.style}`;
+      assessmentLabel.textContent = result.label;
+      assessmentPercent.textContent = `${result.percent}%`;
+      assessmentSummary.textContent = result.summary;
+      assessmentNext.textContent = result.next;
+      fillBar.style.width = `${result.percent}%`;
+      assessmentBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    updateStats();
+    renderSymptoms();
+    renderCases();
+  </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
